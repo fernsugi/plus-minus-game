@@ -4,6 +4,9 @@ PLUS-MINUS is a portrait-first arcade number puzzle game by Wong Hock Chuan Sugi
 
 Tap numbered tiles to land exactly on the target number before time runs out. If the current total is below or equal to the target, the next tile adds. If the total is above the target, the next tile subtracts. Longer routes create bigger combo scores.
 
+## Play on browser
+https://fernsugi.itch.io/plus-minus-game
+
 ## Play Locally
 
 Open `index.html` in a browser.
@@ -28,18 +31,6 @@ http://localhost:8080
 - `GAME.md` - game design specification.
 - `ITCH_IO_PAGE.md` - copy/paste itch.io page text and settings.
 - `LICENSE` - proprietary all-rights-reserved license.
-
-## itch.io Upload
-
-Upload `plus-minus-itch.zip` to itch.io as an HTML game. The ZIP keeps `index.html` at the archive root.
-
-Recommended itch.io settings:
-
-- Kind of project: HTML.
-- Mobile friendly: enabled.
-- Orientation: portrait.
-- Suggested viewport: 720 x 1280 or any 9:16 portrait embed.
-- Fullscreen button: enabled.
 
 ## Rights
 
