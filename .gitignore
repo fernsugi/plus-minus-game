@@ -29,7 +29,6 @@ temp/
 
 # Local screenshots / browser test output
 screenshots/
-*.png
 *.jpg
 *.jpeg
 *.webp
