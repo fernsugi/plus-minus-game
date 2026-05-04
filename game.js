@@ -359,6 +359,7 @@
       this.ctx = canvas.getContext("2d", { alpha: false });
       this.audio = new AudioBus();
       this.viewport = { w: 1, h: 1, dpr: 1, scale: 1, x: 0, y: 0 };
+      this.worldBackgroundCanvas = null;
       this.hotspots = [];
       this.particles = [];
       this.floatTexts = [];
@@ -1220,6 +1221,26 @@
     }
 
     drawWorldBackground(ctx) {
+      const background = this.worldBackgroundCanvas || this.renderWorldBackground();
+      if (background) {
+        ctx.drawImage(background, 0, 0);
+        return;
+      }
+      this.paintWorldBackground(ctx);
+    }
+
+    renderWorldBackground() {
+      const background = document.createElement("canvas");
+      background.width = WORLD_W;
+      background.height = WORLD_H;
+      const ctx = background.getContext("2d", { alpha: false });
+      if (!ctx) return null;
+      this.paintWorldBackground(ctx);
+      this.worldBackgroundCanvas = background;
+      return background;
+    }
+
+    paintWorldBackground(ctx) {
       const g = ctx.createLinearGradient(0, 0, 0, WORLD_H);
       g.addColorStop(0, "#0c1010");
       g.addColorStop(0.48, "#151918");
@@ -1231,7 +1252,7 @@
       ctx.globalAlpha = 0.18;
       ctx.lineWidth = 2;
       for (let i = -8; i < 20; i += 1) {
-        const x = i * 58 + (this.time * 28) % 58;
+        const x = i * 58 + 29;
         ctx.strokeStyle = i % 2 === 0 ? PALETTE.mint : PALETTE.coral;
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -1240,8 +1261,8 @@
       }
       ctx.globalAlpha = 0.08;
       for (let i = 0; i < 18; i += 1) {
-        const x = (i * 73 + Math.sin(this.time * 0.7 + i) * 22) % WORLD_W;
-        const y = (i * 131 + this.time * 18) % WORLD_H;
+        const x = (i * 73 + Math.sin(i * 0.7) * 22) % WORLD_W;
+        const y = (i * 131) % WORLD_H;
         ctx.fillStyle = i % 2 ? PALETTE.gold : PALETTE.teal;
         ctx.font = `900 ${36 + (i % 3) * 12}px ${FONT_HEAVY}`;
         ctx.textAlign = "center";
